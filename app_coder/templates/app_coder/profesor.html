@@ -1,0 +1,29 @@
+{% extends "app_coder/padre.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+    <!-- <style>
+        header{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style> -->
+    <section class="cont">
+        <h1 class="title">AGREGAR PROFESOR</h1>
+        {% if miFormulario.errors %}
+
+        <p style="color: red;"> Están mal los datos, revisar.</p>
+
+        {% endif %}
+    
+        <form action="" method="POST">{% csrf_token %} 
+            <table class="table">
+                {{ miFormulario.as_table }}
+            </table>
+            <input class="busqueda__button" type="submit" value="Enviar">
+        </form>   
+    </section>
+{% endblock %}
+

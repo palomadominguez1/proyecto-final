@@ -1,0 +1,60 @@
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cont {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF6802;
+}
+
+.title {
+    color: #fff;
+    font-size: 3rem;
+    letter-spacing: 0.2rem;
+    font-weight: 500;
+}
+
+.busqueda__input {
+    border: 3px solid #CA0867;
+    padding: 0.2rem;
+}
+
+.busqueda__button {
+    background-color: #CA0867;
+    border: none;
+    color: #fff;
+    padding: 0.3rem 0.5rem;
+    transition: all 0.1s;
+}
+.busqueda__button:hover{
+    background-color: #fff;
+    color: #CA0867;
+}
+
+.para{
+    color: #fff;
+    margin: 0.3rem;
+    font-size: 1.3rem;
+}
+
+.busqueda__list{
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.table > tbody > tr > th > label{
+    color: #fff;
+}
+.table > tbody > tr > td > input{
+    border: 3px solid #CA0867;
+    padding: 0.2rem;
+}

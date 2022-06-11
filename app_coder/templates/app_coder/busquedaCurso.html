@@ -1,0 +1,89 @@
+
+
+{% extends "app_coder/padre.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+    <section class="cont">
+        {% if miFormulario.errors %}
+    
+        <p style="color: red;"> Están mal los datos, revisar.</p>
+    
+        {% endif %}
+        <!-- <a href="{% url 'Inicio' %}">Inicio</a> -->
+    
+        <h2 class="title">Buscar Curso</h2>
+    
+        <form action="/app_coder/buscar" method="GET">{% csrf_token %}
+            <input type="number" name="camada" id="camada"
+            class="busqueda__input">
+    
+            <input type="submit" value="Enviar"
+            class="busqueda__button">
+        </form>
+    
+    
+        {% if cursos %}
+    
+        <p class="para">Estamos buscando los cursos con nivel {{camada}}</p>
+        <ul class="busqueda__list">
+            {% for curso in cursos %}
+            <li>{{curso.nombre}} </li>
+            <!-- <li>Camada: {{curso.camada}} </li> -->
+            {% endfor %}
+        </ul>
+    
+        {% else %}
+        <p class="para">No se encontraron camadas.</p>
+        {% endif %}
+    
+        <p style="color: red;">{{respuesta}}</p>
+
+    </section>
+{% endblock %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario - Buscar Curso</title>
+</head>
+
+<body>
+
+    {% if miFormulario.errors %}
+
+    <p style="color: red;"> Están mal los datos, revisar.</p>
+
+    {% endif %}
+    <a href="{% url 'Inicio' %}">Inicio</a>
+
+    <h2>Buscar Camada</h2>
+
+    <form action="/app_coder/buscar" method="GET">{% csrf_token %}
+        <input type="number" name="camada" id="camada">
+
+        <input type="submit" value="Enviar">
+    </form>
+
+
+    {% if cursos %}
+
+    <p>Estamos buscando el: {{camada}}</p>
+    <ul>
+        {% for curso in cursos %}
+        <li> {{curso.nombre}} </li>
+        <li> {{curso.camada}} </li>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+    <p>No se encontraron camadas.</p>
+    {% endif %}
+
+    <p style="color: red;">{{respuesta}}</p>
+</body>
+
+</html> -->
