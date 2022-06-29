@@ -3,6 +3,7 @@ from django.shortcuts import render
 from app_coder.models import Curso
 from app_coder.models import Estudiante
 from app_coder.models import Profesor
+from app_coder.models import Avatar
 from django.http import HttpResponse
 
 from app_coder.forms import CursoFormulario, ProfesorFormulario, EstudianteFormulario, UserRegistrationForm, UserEditForm
@@ -24,6 +25,7 @@ def redirect_view(request):
     response = redirect('/app_coder/inicio')
     return response
 
+
 def estudiantes(request):
     if request.method == "POST":
         miFormulario = EstudianteFormulario(request.POST)
@@ -39,13 +41,16 @@ def estudiantes(request):
 
     return render(request, "app_coder/estudiantes.html", {"miFormulario":miFormulario})
 
-@login_required
+
 def inicio(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
     return render(request, "app_coder/index.html")
 
-@login_required
+
 def index(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
     return render(request, "app_coder/index.html")
+
 
 def cursos(request):
     if request.method == "POST":
@@ -61,6 +66,7 @@ def cursos(request):
         miFormulario = CursoFormulario()
 
     return render(request, "app_coder/cursos.html", {"miFormulario":miFormulario})
+
 
 def profesor(request):
     if request.method == 'POST':
@@ -80,6 +86,7 @@ def profesor(request):
 def busquedaCurso(request):
     return render(request, 'app_coder/busquedaCurso.html')
 
+
 def buscar(request):
     if request.GET['camada']:
         camada = request.GET['camada']
@@ -93,7 +100,13 @@ def buscar(request):
     # return HttpResponse(respuesta)
     return render(request, "app_coder/busquedaCurso.html", {"respuesta":respuesta})
 
+class EstudianteList(ListView):
+    model = Estudiante
+    template_name = "app_coder/estudiantes_list.html"
 
+class ProfeList(ListView):
+    model = Profesor
+    template_name = "app_coder/profe_list.html"
 
 class CursoList(ListView):
     model = Curso
@@ -130,11 +143,11 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return render(request, 'app_coder/index.html', {"mensaje":f"Bienvenido {usuario}"})
-            else: 
-                return render(request, 'app_coder/index.html', {"mensaje":"Error, datos incorrectos"})
+                return render(request, 'app_coder/index.html', {"mensaje":f"Bienvenido {usuario}", "usuario":usuario})
+            else:
+                return render(request, 'app_coder/login.html', {"mensaje":"Error, datos incorrectos", 'form':form})
         else: 
-            return render(request, 'app_coder/index.html', {"mensaje":"Error, datos incorrectos"})
+            return render(request, 'app_coder/login.html', {"mensaje":"Error, datos incorrectos", 'form':form})
         
     form = AuthenticationForm()
 
@@ -154,7 +167,7 @@ def register(request):
 
     return render(request, "app_coder/registro.html", {"form":form})
 
-@login_required
+
 def editarPerfil(request):
     usuario = request.user
 
@@ -175,3 +188,6 @@ def editarPerfil(request):
 
     return render(request, 'app_coder/editarPerfil.html', {'miFormulario':miFormulario, 'usuario':usuario})
             
+
+def aboutme(request):
+    return render(request, 'app_coder/sobre_mi.html')

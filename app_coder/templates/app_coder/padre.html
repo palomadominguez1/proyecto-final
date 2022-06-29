@@ -21,38 +21,50 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div class="container px-5">
-                <a class="navbar-brand" href="{% url 'Inicio' %}">Your Choice</a>
+                <a class="navbar-brand" href="{% url 'Inicio' %}">
+                    Your Choice <br>
+                    {% if request.user.is_authenticated %}
+                        <a class="navbar-brand" href="{% url 'EditarPerfil' %}">|  Hola, {{user.username}}</a>
+                        
+
+                    {% endif %}
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Estudiantes' %}">Alumnos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Cursos' %}">Cursos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Profesor' %}">Profesores</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'BusquedaCurso' %}">Buscar Curso</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'EstudianteList' %}">Alumnos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'List' %}">Cursos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ProfeList' %}">Profesores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'SobreMi' %}">Sobre mí</a></li>
+                        
+                        {% if not request.user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Login</a></li>
+
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Logout</a></li>
+                        {% endif %}
+                        
+                        
                     </ul>
                 </div>
             </div>
         </nav>
+
         <!-- Header-->
-        <!-- <header class="masthead text-center text-white">
+        <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Instituto de Idiomas</h1>
-                    <h2 class="masthead-subheading mb-0">y centro de estudios</h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Empezá ya!</a>
+                    {% block contenidoQueCambia %}
+    
+                    {% endblock %}
                 </div>
             </div>
             <div class="bg-circle-1 bg-circle"></div>
             <div class="bg-circle-2 bg-circle"></div>
             <div class="bg-circle-3 bg-circle"></div>
             <div class="bg-circle-4 bg-circle"></div>
-        </header> -->
+        </header>
 
-        <main>
-            {% block contenidoQueCambia %}
-    
-            {% endblock %}
-        </main>
 
         <!-- Footer-->
         <footer class="py-5 bg-black">

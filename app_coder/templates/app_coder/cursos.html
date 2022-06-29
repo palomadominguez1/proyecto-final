@@ -3,19 +3,19 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-    <section class="cont">
-        <h1 class="title">AGREGAR CURSOS</h1>
-    
-        {% if miFormulario.errors %}
-            <p style="color: red;">Estan mal los datos, revisar</p>
-        {% endif %}
-    
-        <form action="" method="POST"> {% csrf_token %}
-            <table class="table">
-                {{ miFormulario.as_table }}
-            </table>
-            <input class="busqueda__button" type="submit" value="Enviar">
-        </form>
-    </section>
+<section class="cont">
+    <h1 class="title">AGREGAR CURSOS</h1>
+
+    {% if miFormulario.errors %}
+        <p style="color: red;">Estan mal los datos, revisar</p>
+    {% endif %}
+
+    <form action="" method="POST"> {% csrf_token %}
+        <table class="table">
+            {{ miFormulario.as_table }}
+        </table>
+        <input class="busqueda__button" type="submit" value="Enviar">
+    </form>
+</section>
 
 {% endblock %}

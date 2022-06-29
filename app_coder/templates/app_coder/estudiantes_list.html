@@ -1,0 +1,42 @@
+{% extends "app_coder/padre.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+<style>
+    .button{
+        text-decoration: none;
+        margin: 1rem;
+        padding: 0.5rem 0.8rem ;
+    }
+    ul{
+        margin: 1rem;
+        list-style: none;
+    }
+    .curso__nombre{
+        font-size: 1.3rem;
+    }
+    p{
+        border-bottom: 1px solid #fff;
+        padding: 0.5rem;
+    }
+</style>
+
+<h1>Alumnos</h1>
+{% if request.user.is_authenticated %}
+    <a class="busqueda__button button" href="{% url 'Estudiantes' %}">Agregar Estudiante</a>
+{% endif %}
+<ul>
+    {% for profe in object_list %}
+
+    <li>
+        <p class="curso__nombre">
+            {{profe.nombre}} {{profe.apellido}} 
+            -
+            {{profe.email}}
+        </p>
+    </li>
+
+    {% endfor %}
+</ul>
+
+{% endblock %}
